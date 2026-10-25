@@ -1,4 +1,4 @@
-## Unreleased
+## 6.0.0
 *  - Fixed `Illegal invocation` error in browsers when no custom fetch function is passed
 *  - Fixed `LanguageString` serialization: `createCompanyAccount()` sent `{"_map":{}}` as the name
 *  - Exported `LanguageString`, `DeeplinkResponse`, `PaymentRequestResponse` and `PaymentRequestStatusResponse`
