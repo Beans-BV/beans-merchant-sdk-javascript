@@ -52,6 +52,10 @@ export declare class LanguageString {
      */
     toJson(): Record<string, string>;
     /**
+     * Called by `JSON.stringify`. Without it, the private Map serializes as `{"_map":{}}`.
+     */
+    toJSON(): Record<string, string>;
+    /**
      * Converts the LanguageString to a JSON string.
      */
     toJsonString(): string;

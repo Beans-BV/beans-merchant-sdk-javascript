@@ -104,6 +104,13 @@ export class LanguageString {
   }
 
   /**
+   * Called by `JSON.stringify`. Without it, the private Map serializes as `{"_map":{}}`.
+   */
+  toJSON(): Record<string, string> {
+    return this.toJson();
+  }
+
+  /**
    * Converts the LanguageString to a JSON string.
    */
   toJsonString(): string {
