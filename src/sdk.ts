@@ -14,10 +14,14 @@ export {
     ApiException,
     CompanyAccount,
     CreateCompanyAccountResponse,
+    DeeplinkResponse,
     DeleteCompanyAccountResponse,
     FetchStellarCurrenciesResponse,
     GetCompanyAccountResponseDto,
     GetCompanyAccountsResponseDto,
+    LanguageString,
+    PaymentRequestResponse,
+    PaymentRequestStatusResponse,
     PngQrCodeResponse,
     StellarCurrency,
     SvgQrCodeResponse
@@ -33,7 +37,8 @@ export class BeansMerchantSdk {
     ) {
         this.apiBaseUrl = apiBaseUrl;
         this.apiKey = apiKey;
-        this.fetchFunction = fetchFunction;
+        // Browsers throw "Illegal invocation" when fetch is called as a method of another object.
+        this.fetchFunction = (input, init) => fetchFunction(input, init);
     }
     static production(apiKey: string, fetchFunction?: FetchFunction): BeansMerchantSdk {
         return new BeansMerchantSdk('https://api.beansapp.com/v4', apiKey, fetchFunction ?? fetch);
@@ -207,13 +212,13 @@ export class BeansMerchantSdk {
      * Creates an Account for the company
      * 
      * @param stellarAccountId The Stellar account ID for the Account
-     * @param name The name of the Account in different languages as a map where
-     * the key is the language code (e.g., 'en', 'vn') and the value is the name in that language
+     * @param name The name of the Account in different languages, as a `LanguageString` or as a plain
+     * object where the key is the language code (e.g., 'en', 'vn') and the value is the name in that language
      * @returns Promise containing the created company account
      */
     async createCompanyAccount(
         stellarAccountId: string,
-        name: LanguageString
+        name: LanguageString | Record<string, string>
     ): Promise<CreateCompanyAccountResponse> {
         const url = `${this.apiBaseUrl}/companies/me/account`;
 
@@ -314,13 +319,11 @@ export class BeansMerchantSdk {
      * Deletes an Account for the company
      * 
      * @param stellarAccountId The Stellar account ID of the Account to delete
-     * @returns Promise containing the deleted company account and status information
-     * 
+     * @returns Promise that resolves with an empty object when the Account is deleted
+     *
      * @example
      * ```typescript
-     * const response = await sdk.deleteCompanyAccount('GCQYCNYU3T73JCQ2J36A3JJ5CUQO4DY4EOKMPUL5723ZH7N6XMMNPAA3');
-     * console.log('Deleted account:', response.account.id);
-     * console.log('Status:', response.status);
+     * await sdk.deleteCompanyAccount('GCQYCNYU3T73JCQ2J36A3JJ5CUQO4DY4EOKMPUL5723ZH7N6XMMNPAA3');
      * ```
      */
     async deleteCompanyAccount(

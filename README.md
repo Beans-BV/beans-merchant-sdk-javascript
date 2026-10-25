@@ -142,6 +142,15 @@ Parameters:
 Parameters:
 - `apiKey`: Your Beans Merchant API key.
 
+#### Custom Environment
+`BeansMerchantSdk.custom(apiBaseUrl: string, apiKey: string)`: Creates an SDK instance for a custom API base URL, for example a locally hosted Beans API.
+
+Parameters:
+- `apiBaseUrl`: The API base URL including the version, for example `https://localhost:5200/v4`. A trailing `/` is removed.
+- `apiKey`: Your Beans Merchant API key.
+
+All three methods also accept an optional `fetchFunction` as the last parameter, for example to add logging or to use a fetch polyfill.
+
 ### Methods
 
 #### Fetch Stellar Currencies
@@ -270,6 +279,30 @@ sdk.generateSvgQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, '
   });
 ```
 
+#### Get Payment Request Status
+
+*Gets the status of a payment request.*
+
+Method Signature:<br>
+`Promise<PaymentRequestStatusResponse> getPaymentRequestStatus(...)`
+
+Parameters:<br>
+  - `paymentRequestId`: *The `id` of the payment request, as returned by `generateDeeplink`, `generatePngQrCode` or `generateSvgQrCode`.*
+
+Returns:<br>
+`Promise<PaymentRequestStatusResponse>`: *A promise that resolves with the status of the payment request.*
+
+Return Object Properties:<br>
+  - `status`: *`Pending` or `Completed`.*
+
+Example:<br>
+```js
+sdk.getPaymentRequestStatus('paymentRequestId')
+  .then((response) => {
+    console.log('Payment request status:', response.status);
+  });
+```
+
 #### Create Company Account
 
 *Creates an account for the company or its clients to receive payments..*
@@ -279,7 +312,7 @@ Method Signature:<br>
 
 Parameters:<br>
   - `stellarAccountId`: *The Stellar account ID for the account.*
-  - `name`: *The name of the account in different languages as a map where the key is the language code (e.g., 'en', 'vn') and the value is the name in that language.*
+  - `name`: *The name of the account in different languages, as a `LanguageString` or as a plain object where the key is the language code (e.g., 'en', 'vn') and the value is the name in that language. English (`en`) is required.*
 
 Returns:<br>
 `Promise<CreateCompanyAccountResponse>`: *A promise that resolves with the response object containing the created company account.*
@@ -337,18 +370,13 @@ Parameters:<br>
   - `stellarAccountId`: *The Stellar account ID of the account to delete.*
 
 Returns:<br>
-`Promise<DeleteCompanyAccountResponse>`: *A promise that resolves with the response object containing information about the deleted an account.*
-
-Return Object Properties:<br>
-  - `account`: *The CompanyAccount object representing the deleted an account.*
-  - `status`: *The status of the deletion operation, typically "deleted".*
+`Promise<DeleteCompanyAccountResponse>`: *A promise that resolves with an empty object when the account is deleted.*
 
 Example:<br>
 ```js
 sdk.deleteCompanyAccount('GCQYCNYU3T73JCQ2J36A3JJ5CUQO4DY4EOKMPUL5723ZH7N6XMMNPAA3')
-  .then((response) => {
-    console.log('Deleted account:', response.account.id);
-    console.log('Status:', response.status);
+  .then(() => {
+    console.log('Account deleted');
   });
 ```
 
