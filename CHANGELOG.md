@@ -1,3 +1,7 @@
+## Unreleased
+*  - Fixed the method names, parameter names and examples in `README.md`
+*  - Fixed the repository and issue links in `package.json`
+
 ## 6.0.1
 *  - The npm package now contains only `dist/sdk.js`, the type declarations, `src`, `README.md`, `CHANGELOG.md` and `LICENSE`, instead of the whole repository
 *  - Renamed the `publish` script to `release`, because `npm publish` runs a script named `publish` itself
