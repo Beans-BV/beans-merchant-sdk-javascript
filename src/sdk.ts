@@ -1,14 +1,14 @@
-import { ApiException } from './exceptions/api_exception';
-import { CompanyAccount } from './models/company_account';
-import { CreateCompanyAccountResponse } from './models/create_company_account_response';
-import { DeleteCompanyAccountResponse } from './models/delete_company_account_response';
-import { FetchStellarCurrenciesResponse } from './models/fetch_stellar_currencies_response';
-import { GetCompanyAccountResponseDto } from './models/get_company_account_response';
-import { GetCompanyAccountsResponseDto } from './models/get_company_accounts_response';
-import { LanguageString } from './models/language_string';
-import { PaymentRequestStatusResponse } from './models/payment_request_status_response';
-import { DeeplinkResponse, PaymentRequestResponse, PngQrCodeResponse, SvgQrCodeResponse } from './models/qr_code_response';
-import { StellarCurrency } from './models/stellar_currency';
+import { ApiException } from './exceptions/api_exception.js';
+import { CompanyAccount } from './models/company_account.js';
+import { CreateCompanyAccountResponse } from './models/create_company_account_response.js';
+import { DeleteCompanyAccountResponse } from './models/delete_company_account_response.js';
+import { FetchStellarCurrenciesResponse } from './models/fetch_stellar_currencies_response.js';
+import { GetCompanyAccountResponseDto } from './models/get_company_account_response.js';
+import { GetCompanyAccountsResponseDto } from './models/get_company_accounts_response.js';
+import { LanguageString } from './models/language_string.js';
+import { PaymentRequestStatusResponse } from './models/payment_request_status_response.js';
+import { DeeplinkResponse, PaymentRequestResponse, PngQrCodeResponse, SvgQrCodeResponse } from './models/qr_code_response.js';
+import { StellarCurrency } from './models/stellar_currency.js';
 
 export {
     ApiException,

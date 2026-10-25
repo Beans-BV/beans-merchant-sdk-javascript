@@ -1,3 +1,6 @@
+## Unreleased
+*  - Fixed the type declarations for TypeScript projects that use `moduleResolution` `node16` or `nodenext` (error `TS2834`)
+
 ## 6.0.0
 *  - Fixed `Illegal invocation` error in browsers when no custom fetch function is passed
 *  - Fixed `LanguageString` serialization: `createCompanyAccount()` sent `{"_map":{}}` as the name
