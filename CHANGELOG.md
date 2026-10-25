@@ -1,3 +1,7 @@
+## Unreleased
+*  - The npm package now contains only `dist/sdk.js`, the type declarations, `src`, `README.md`, `CHANGELOG.md` and `LICENSE`, instead of the whole repository
+*  - Renamed the `publish` script to `release`, because `npm publish` runs a script named `publish` itself
+
 ## 6.0.0
 *  - Fixed `Illegal invocation` error in browsers when no custom fetch function is passed
 *  - Fixed `LanguageString` serialization: `createCompanyAccount()` sent `{"_map":{}}` as the name
