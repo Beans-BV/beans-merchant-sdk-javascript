@@ -7,9 +7,9 @@ import { GetCompanyAccountResponseDto } from './models/get_company_account_respo
 import { GetCompanyAccountsResponseDto } from './models/get_company_accounts_response';
 import { LanguageString } from './models/language_string';
 import { PaymentRequestStatusResponse } from './models/payment_request_status_response';
-import { DeeplinkResponse, PngQrCodeResponse, SvgQrCodeResponse } from './models/qr_code_response';
+import { DeeplinkResponse, PaymentRequestResponse, PngQrCodeResponse, SvgQrCodeResponse } from './models/qr_code_response';
 import { StellarCurrency } from './models/stellar_currency';
-export { ApiException, CompanyAccount, CreateCompanyAccountResponse, DeleteCompanyAccountResponse, FetchStellarCurrenciesResponse, GetCompanyAccountResponseDto, GetCompanyAccountsResponseDto, PngQrCodeResponse, StellarCurrency, SvgQrCodeResponse };
+export { ApiException, CompanyAccount, CreateCompanyAccountResponse, DeeplinkResponse, DeleteCompanyAccountResponse, FetchStellarCurrenciesResponse, GetCompanyAccountResponseDto, GetCompanyAccountsResponseDto, LanguageString, PaymentRequestResponse, PaymentRequestStatusResponse, PngQrCodeResponse, StellarCurrency, SvgQrCodeResponse };
 type FetchFunction = typeof fetch;
 export declare class BeansMerchantSdk {
     private constructor();
@@ -29,11 +29,11 @@ export declare class BeansMerchantSdk {
      * Creates an Account for the company
      *
      * @param stellarAccountId The Stellar account ID for the Account
-     * @param name The name of the Account in different languages as a map where
-     * the key is the language code (e.g., 'en', 'vn') and the value is the name in that language
+     * @param name The name of the Account in different languages, as a `LanguageString` or as a plain
+     * object where the key is the language code (e.g., 'en', 'vn') and the value is the name in that language
      * @returns Promise containing the created company account
      */
-    createCompanyAccount(stellarAccountId: string, name: LanguageString): Promise<CreateCompanyAccountResponse>;
+    createCompanyAccount(stellarAccountId: string, name: LanguageString | Record<string, string>): Promise<CreateCompanyAccountResponse>;
     /**
      * Uploads an avatar for a company Account
      *
@@ -54,13 +54,11 @@ export declare class BeansMerchantSdk {
      * Deletes an Account for the company
      *
      * @param stellarAccountId The Stellar account ID of the Account to delete
-     * @returns Promise containing the deleted company account and status information
+     * @returns Promise that resolves with an empty object when the Account is deleted
      *
      * @example
      * ```typescript
-     * const response = await sdk.deleteCompanyAccount('GCQYCNYU3T73JCQ2J36A3JJ5CUQO4DY4EOKMPUL5723ZH7N6XMMNPAA3');
-     * console.log('Deleted account:', response.account.id);
-     * console.log('Status:', response.status);
+     * await sdk.deleteCompanyAccount('GCQYCNYU3T73JCQ2J36A3JJ5CUQO4DY4EOKMPUL5723ZH7N6XMMNPAA3');
      * ```
      */
     deleteCompanyAccount(stellarAccountId: string): Promise<DeleteCompanyAccountResponse>;

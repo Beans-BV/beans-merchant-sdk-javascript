@@ -1,3 +1,13 @@
+## Unreleased
+*  - Fixed `Illegal invocation` error in browsers when no custom fetch function is passed
+*  - Fixed `LanguageString` serialization: `createCompanyAccount()` sent `{"_map":{}}` as the name
+*  - Exported `LanguageString`, `DeeplinkResponse`, `PaymentRequestResponse` and `PaymentRequestStatusResponse`
+*  - `createCompanyAccount()` now accepts a `LanguageString` or a plain object as the name
+*
+* **BREAKING CHANGES (types only, the runtime values do not change):**
+*  - `DeleteCompanyAccountResponse` is now an empty object, which is what the API returns
+*  - `CompanyAccount.name` is now `Record<string, string>`, which is what the API returns
+
 ## 5.0.0
 *  - Added `avatarUrl` to `CompanyAccount` class
 *  - Added `LanguageString` class for better multi-language support

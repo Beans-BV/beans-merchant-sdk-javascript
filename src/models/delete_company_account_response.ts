@@ -1,16 +1,5 @@
-import { CompanyAccount } from './company_account';
-
 /**
- * Response object returned when deleting a company Account
+ * Response object returned when deleting a company Account.
+ * The API returns an empty object.
  */
-export interface DeleteCompanyAccountResponse {
-    /**
-     * The deleted account
-     */
-    account: CompanyAccount;
-    
-    /**
-     * The status of the deletion operation
-     */
-    status: string;
-} 
+export type DeleteCompanyAccountResponse = Record<string, never>;
