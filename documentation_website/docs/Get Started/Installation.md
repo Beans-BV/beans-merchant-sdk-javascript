@@ -8,16 +8,23 @@ npm install beans-merchant-sdk
 
 ## API Reference
 
-### `BeansMerchantSDK(apiKey, environment)`
+Create an instance with one of the static factory methods. The constructor is private, so do not use `new`.
 
-Constructor for creating a new instance of the BeansMerchantSDK class.
+### `BeansMerchantSdk.production(apiKey, fetchFunction?)`
+
+Creates an SDK instance for the production environment.
+
+### `BeansMerchantSdk.staging(apiKey, fetchFunction?)`
+
+Creates an SDK instance for the staging environment.
+
+### `BeansMerchantSdk.custom(apiBaseUrl, apiKey, fetchFunction?)`
+
+Creates an SDK instance for a custom API base URL, for example a locally hosted Beans API.
+
+- `apiBaseUrl`: The API base URL including the version, for example `https://localhost:5200/v4`. A trailing `/` is removed.
+
+Parameters of all three methods:
 
 - `apiKey`: Your Beans Merchant API key.
-- `environment`: The environment (development or staging) specified using `BeansMerchantEnvironment`.
-
-### `BeansMerchantEnvironment`
-
-An enumeration class that provides environment constants.
-
-- `DEVELOP`: Development environment.
-- `STAGING`: Staging environment.
+- `fetchFunction`: Optional function used instead of the global `fetch`, for example to add logging or to use a fetch polyfill.

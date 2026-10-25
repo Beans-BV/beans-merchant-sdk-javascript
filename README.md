@@ -86,13 +86,13 @@ npm install beans-merchant-sdk
 ## Usage
 
 ```ts
-import {BeansMerchantSdk, BeansMerchantSdkEnvironment}  from '../node_modules/beans-merchant-sdk/dist/sdk.js';
+import { BeansMerchantSdk, DeeplinkResponse, FetchStellarCurrenciesResponse, PngQrCodeResponse, SvgQrCodeResponse } from 'beans-merchant-sdk';
 
 // Create an instance of BeansMerchantSdk
-const sdk = new BeansMerchantSdk.staging('YOUR_API_KEY');
+const sdk = BeansMerchantSdk.staging('YOUR_API_KEY');
 
 // Fetch currencies
-sdk.fetchCurrencies('stellarAccountId')
+sdk.fetchStellarCurrencies('stellarAccountId')
   .then((response: FetchStellarCurrenciesResponse) => {
     console.log('Available currencies:', response.stellarCurrencies);
   });
@@ -104,14 +104,14 @@ sdk.generateDeeplink('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'h
   });
 
 // Generate SVG QR code
-sdk.generateSvgQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generateSvgQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: SvgQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated SVG QR code:', response.svgQrCode);
   });
 
 // Generate PNG QR code
-merchant.generatePngQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generatePngQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: PngQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated PNG QR code:', response.pngQrCodeDataUri);
@@ -171,7 +171,7 @@ Return Object Properties:<br>
 
 Example:<br>
 ```js
-sdk.fetchCurrencies('stellarAccountId')
+sdk.fetchStellarCurrencies('stellarAccountId')
   .then((response: FetchStellarCurrenciesResponse) => {
     console.log('Available currencies:', response.stellarCurrencies);
   });
@@ -186,7 +186,7 @@ Method Signature:<br>
 
 Parameters:<br>
   - `stellarAccountId`: *Your Stellar account ID.*
-  - `currencyId`: *Stellar currency ID.*
+  - `stellarCurrencyId`: *Stellar currency ID.*
   - `amount`: *Amount for the payment request.*
   - `memo`: *Memo for the payment request.*
   - `maxAllowedPayments`: *(Optional) Maximum number of payments allowed for the payment request.*
@@ -218,7 +218,7 @@ Method Signature:<br>
 
 Parameters:<br>
   - `stellarAccountId`: *Your Stellar account ID.*
-  - `currencyId`: *Stellar currency ID.*
+  - `stellarCurrencyId`: *Stellar currency ID.*
   - `amount`: *Amount for the payment request.*
   - `memo`: *Memo for the payment request.*
   - `maxAllowedPayments`: *(Optional) Maximum number of payments allowed for the payment request.*
@@ -237,7 +237,7 @@ Return Object Properties:<br>
 
 Example:<br>
 ```js
-sdk.generatePngQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generatePngQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: PngQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated PNG QR code:', response.pngQrCodeDataUri);
@@ -253,7 +253,7 @@ Method Signature:<br>
 
 Parameters:<br>
   - `stellarAccountId`: *Your Stellar account ID.*
-  - `currencyId`: *Stellar currency ID.*
+  - `stellarCurrencyId`: *Stellar currency ID.*
   - `amount`: *Amount for the payment request.*
   - `memo`: *Memo for the payment request.*
   - `maxAllowedPayments`: *(Optional) Maximum number of payments allowed for the payment request.*
@@ -272,7 +272,7 @@ Return Object Properties:<br>
 
 Example:<br>
 ```js
-sdk.generateSvgQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generateSvgQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: SvgQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated SVG QR code:', response.svgQrCode);
