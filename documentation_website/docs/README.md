@@ -2,9 +2,9 @@
 sidebar_position: 1
 sidebar_label: 'Beans Merchant SDK'
 ---
-# beans-merchant
+# beans-merchant-sdk
 
-[![npm version](https://badge.fury.io/js/beans-merchant.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
+[![npm version](https://badge.fury.io/js/beans-merchant-sdk.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
 
 Beans Merchant is a JavaScript library for interacting with the Beans Merchant API. It provides a convenient way to integrate Beans Merchant functionality into your web applications.
 

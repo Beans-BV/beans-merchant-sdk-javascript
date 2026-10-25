@@ -1,6 +1,6 @@
 <h1>Beans Merchant JavaScript SDK</h1>
 
-[![npm version](https://badge.fury.io/js/beans-merchant.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
+[![npm version](https://badge.fury.io/js/beans-merchant-sdk.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
 
 - [Introduction](#introduction)
   - [Use Cases](#use-cases)
@@ -15,11 +15,13 @@
     - [Constructor Methods](#constructor-methods)
       - [Production Environment](#production-environment)
       - [Staging Environment](#staging-environment)
+      - [Custom Environment](#custom-environment)
     - [Methods](#methods)
       - [Fetch Stellar Currencies](#fetch-stellar-currencies)
       - [Generate Deeplink](#generate-deeplink)
       - [Generate PNG QR Code](#generate-png-qr-code)
       - [Generate SVG QR Code](#generate-svg-qr-code)
+      - [Get Payment Request Status](#get-payment-request-status)
       - [Create Company Account](#create-company-account)
       - [Upload Company Account Avatar](#upload-company-account-avatar)
       - [Delete Company Account](#delete-company-account)
@@ -477,7 +479,7 @@ We've provided examples to help you understand what you as a business can do wit
 
 This example showcases a checkout page that allows users to pay for items using Beans. You can see how easy it is to integrate Beans payments into your e-commerce platform.
 
-Find the full example code [here](https://github.com/Beans-BV/merchant_sdk_javascript/tree/main/example/shopping_basket).
+Find the full example code [here](https://github.com/Beans-BV/beans-merchant-sdk-javascript/tree/main/example/shopping_basket).
 
 ### account Management
 
@@ -489,10 +491,10 @@ We've added an example that demonstrates how to create and manage company accoun
 
 This functionality is particularly useful for businesses that need to manage multiple Stellar accounts under a single company account.
 
-Find the full example code [here](https://github.com/Beans-BV/merchant_sdk_javascript/blob/main/example/account/index.html).
+Find the full example code [here](https://github.com/Beans-BV/beans-merchant-sdk-javascript/blob/main/example/account/index.html).
 
 ### Advanced (for developers)
 
 This example is more technical and aimed at developers who want to understand the full capabilities of the Beans Merchant SDK.
 
-Find the full example code [here](https://github.com/Beans-BV/merchant_sdk_javascript/tree/main/example/shopping_basket).
+Find the full example code [here](https://github.com/Beans-BV/beans-merchant-sdk-javascript/tree/main/example/developer).

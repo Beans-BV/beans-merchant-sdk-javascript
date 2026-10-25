@@ -9,7 +9,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Beans Merchant SDK Documentations',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'JavaScript SDK for the Beans Merchant API',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -20,8 +20,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'Beans-BV', // Usually your GitHub org/user name.
+  projectName: 'beans-merchant-sdk-javascript', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -41,17 +41,15 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/Beans-BV/beans-merchant-sdk-javascript/tree/main/documentation_website/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/Beans-BV/beans-merchant-sdk-javascript/tree/main/documentation_website/',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -68,7 +66,7 @@ const config = {
       navbar: {
         title: '',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Beans logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -80,7 +78,7 @@ const config = {
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/Beans-BV/merchant_sdk_javascript',
+            href: 'https://github.com/Beans-BV/beans-merchant-sdk-javascript',
             label: 'GitHub',
             position: 'right',
           },
@@ -93,25 +91,25 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Beans Merchant SDK',
+                to: '/docs/',
+              },
+              {
+                label: 'Methods',
+                to: '/docs/Methods',
               },
             ],
           },
           {
-            title: 'Community',
+            title: 'Beans',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'Website',
+                href: 'https://www.beansapp.com/',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'Request an account',
+                href: 'mailto:merchants@beansapp.com',
               },
             ],
           },
@@ -123,13 +121,17 @@ const config = {
                 to: '/blog',
               },
               {
+                label: 'npm',
+                href: 'https://www.npmjs.com/package/beans-merchant-sdk',
+              },
+              {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/Beans-BV/beans-merchant-sdk-javascript',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Beans. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
