@@ -1,6 +1,6 @@
 <h1>Beans Merchant JavaScript SDK</h1>
 
-[![npm version](https://badge.fury.io/js/beans-merchant.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
+[![npm version](https://badge.fury.io/js/beans-merchant-sdk.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
 
 - [Introduction](#introduction)
   - [Use Cases](#use-cases)
@@ -15,11 +15,13 @@
     - [Constructor Methods](#constructor-methods)
       - [Production Environment](#production-environment)
       - [Staging Environment](#staging-environment)
+      - [Custom Environment](#custom-environment)
     - [Methods](#methods)
       - [Fetch Stellar Currencies](#fetch-stellar-currencies)
       - [Generate Deeplink](#generate-deeplink)
       - [Generate PNG QR Code](#generate-png-qr-code)
       - [Generate SVG QR Code](#generate-svg-qr-code)
+      - [Get Payment Request Status](#get-payment-request-status)
       - [Create Company Account](#create-company-account)
       - [Upload Company Account Avatar](#upload-company-account-avatar)
       - [Delete Company Account](#delete-company-account)
@@ -86,13 +88,13 @@ npm install beans-merchant-sdk
 ## Usage
 
 ```ts
-import {BeansMerchantSdk, BeansMerchantSdkEnvironment}  from '../node_modules/beans-merchant-sdk/dist/sdk.js';
+import { BeansMerchantSdk, DeeplinkResponse, FetchStellarCurrenciesResponse, PngQrCodeResponse, SvgQrCodeResponse } from 'beans-merchant-sdk';
 
 // Create an instance of BeansMerchantSdk
-const sdk = new BeansMerchantSdk.staging('YOUR_API_KEY');
+const sdk = BeansMerchantSdk.staging('YOUR_API_KEY');
 
 // Fetch currencies
-sdk.fetchCurrencies('stellarAccountId')
+sdk.fetchStellarCurrencies('stellarAccountId')
   .then((response: FetchStellarCurrenciesResponse) => {
     console.log('Available currencies:', response.stellarCurrencies);
   });
@@ -104,14 +106,14 @@ sdk.generateDeeplink('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'h
   });
 
 // Generate SVG QR code
-sdk.generateSvgQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generateSvgQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: SvgQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated SVG QR code:', response.svgQrCode);
   });
 
 // Generate PNG QR code
-merchant.generatePngQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generatePngQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: PngQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated PNG QR code:', response.pngQrCodeDataUri);
@@ -171,7 +173,7 @@ Return Object Properties:<br>
 
 Example:<br>
 ```js
-sdk.fetchCurrencies('stellarAccountId')
+sdk.fetchStellarCurrencies('stellarAccountId')
   .then((response: FetchStellarCurrenciesResponse) => {
     console.log('Available currencies:', response.stellarCurrencies);
   });
@@ -186,7 +188,7 @@ Method Signature:<br>
 
 Parameters:<br>
   - `stellarAccountId`: *Your Stellar account ID.*
-  - `currencyId`: *Stellar currency ID.*
+  - `stellarCurrencyId`: *Stellar currency ID.*
   - `amount`: *Amount for the payment request.*
   - `memo`: *Memo for the payment request.*
   - `maxAllowedPayments`: *(Optional) Maximum number of payments allowed for the payment request.*
@@ -218,7 +220,7 @@ Method Signature:<br>
 
 Parameters:<br>
   - `stellarAccountId`: *Your Stellar account ID.*
-  - `currencyId`: *Stellar currency ID.*
+  - `stellarCurrencyId`: *Stellar currency ID.*
   - `amount`: *Amount for the payment request.*
   - `memo`: *Memo for the payment request.*
   - `maxAllowedPayments`: *(Optional) Maximum number of payments allowed for the payment request.*
@@ -237,7 +239,7 @@ Return Object Properties:<br>
 
 Example:<br>
 ```js
-sdk.generatePngQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generatePngQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: PngQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated PNG QR code:', response.pngQrCodeDataUri);
@@ -253,7 +255,7 @@ Method Signature:<br>
 
 Parameters:<br>
   - `stellarAccountId`: *Your Stellar account ID.*
-  - `currencyId`: *Stellar currency ID.*
+  - `stellarCurrencyId`: *Stellar currency ID.*
   - `amount`: *Amount for the payment request.*
   - `memo`: *Memo for the payment request.*
   - `maxAllowedPayments`: *(Optional) Maximum number of payments allowed for the payment request.*
@@ -272,7 +274,7 @@ Return Object Properties:<br>
 
 Example:<br>
 ```js
-sdk.generateSvgQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
+sdk.generateSvgQrCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: SvgQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
     console.log('Generated SVG QR code:', response.svgQrCode);
@@ -477,7 +479,7 @@ We've provided examples to help you understand what you as a business can do wit
 
 This example showcases a checkout page that allows users to pay for items using Beans. You can see how easy it is to integrate Beans payments into your e-commerce platform.
 
-Find the full example code [here](https://github.com/Beans-BV/merchant_sdk_javascript/tree/main/example/shopping_basket).
+Find the full example code [here](https://github.com/Beans-BV/beans-merchant-sdk-javascript/tree/main/example/shopping_basket).
 
 ### account Management
 
@@ -489,10 +491,10 @@ We've added an example that demonstrates how to create and manage company accoun
 
 This functionality is particularly useful for businesses that need to manage multiple Stellar accounts under a single company account.
 
-Find the full example code [here](https://github.com/Beans-BV/merchant_sdk_javascript/blob/main/example/account/index.html).
+Find the full example code [here](https://github.com/Beans-BV/beans-merchant-sdk-javascript/blob/main/example/account/index.html).
 
 ### Advanced (for developers)
 
 This example is more technical and aimed at developers who want to understand the full capabilities of the Beans Merchant SDK.
 
-Find the full example code [here](https://github.com/Beans-BV/merchant_sdk_javascript/tree/main/example/shopping_basket).
+Find the full example code [here](https://github.com/Beans-BV/beans-merchant-sdk-javascript/tree/main/example/developer).

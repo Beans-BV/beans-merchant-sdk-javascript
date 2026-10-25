@@ -2,9 +2,9 @@
 sidebar_position: 1
 sidebar_label: 'Beans Merchant SDK'
 ---
-# beans-merchant
+# beans-merchant-sdk
 
-[![npm version](https://badge.fury.io/js/beans-merchant.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
+[![npm version](https://badge.fury.io/js/beans-merchant-sdk.svg)](https://www.npmjs.com/package/beans-merchant-sdk)
 
 Beans Merchant is a JavaScript library for interacting with the Beans Merchant API. It provides a convenient way to integrate Beans Merchant functionality into your web applications.
 
@@ -18,92 +18,55 @@ npm install beans-merchant-sdk
 
 ## Usage
 
-```bash
-// Import the BeansMerchantSDK class and BeansMerchantEnvironment
-import {BeansMerchantSDK, BeansMerchantEnvironment} from './index.js';
+```js
+// Import the BeansMerchantSdk class
+import { BeansMerchantSdk } from 'beans-merchant-sdk';
 
-// Create an instance of BeansMerchantSDK
-const merchant = new BeansMerchantSDK('your-api-key', BeansMerchantEnvironment.STAGING);
+// Create an instance for the staging environment
+const sdk = BeansMerchantSdk.staging('your-api-key');
 
-// Fetch currencies
-merchant.fetchCurrencies('stellarAccountId')
-  .then(currencies => {
-    console.log('Available currencies:', currencies);
+// Fetch the Stellar currencies of your account
+sdk.fetchStellarCurrencies('stellarAccountId')
+  .then(response => {
+    console.log('Available currencies:', response.stellarCurrencies);
   })
   .catch(error => {
     console.error('Error fetching currencies:', error);
   });
 
-// Generate QR code
-merchant.generateSvgQRCode('stellarAccountId','currency-id', 'amount', 'memo')
-  .then(qrCode => {
-    console.log('Generated QR code:', qrCode);
+// Generate an SVG QR code for a payment request of 10 units
+sdk.generateSvgQrCode('stellarAccountId', 'stellarCurrencyId', 10, 'memo')
+  .then(response => {
+    console.log('Payment request ID:', response.id);
+    console.log('SVG QR code:', response.svgQrCode);
   })
   .catch(error => {
     console.error('Error generating QR code:', error);
   });
 ```
+
 ## API Reference
 
-### `BeansMerchantSDK(apiKey, environment)`
+Create an instance with one of the static factory methods. The constructor is private, so do not use `new`.
 
-Constructor for creating a new instance of the BeansMerchantSDK class.
+- `BeansMerchantSdk.production(apiKey, fetchFunction?)`: the production environment.
+- `BeansMerchantSdk.staging(apiKey, fetchFunction?)`: the staging environment.
+- `BeansMerchantSdk.custom(apiBaseUrl, apiKey, fetchFunction?)`: a custom API base URL including the version, for example `https://localhost:5200/v4`.
 
-- `apiKey`: Your Beans Merchant API key.
-- `environment`: The environment (development or staging) specified using `BeansMerchantEnvironment`.
+`fetchFunction` is optional. It replaces the global `fetch`, for example to add logging or to use a fetch polyfill.
 
-### `BeansMerchantEnvironment`
+### Methods
 
-An enumeration class that provides environment constants.
+- `fetchStellarCurrencies(stellarAccountId)`
+- `generateDeeplink(stellarAccountId, stellarCurrencyId, amount, memo, maxAllowedPayments?, webhookUrl?)`
+- `generatePngQrCode(stellarAccountId, stellarCurrencyId, amount, memo, maxAllowedPayments?, webhookUrl?, preferredSize?)`
+- `generateSvgQrCode(stellarAccountId, stellarCurrencyId, amount, memo, maxAllowedPayments?, webhookUrl?, size?)`
+- `getPaymentRequestStatus(paymentRequestId)`
+- `createCompanyAccount(stellarAccountId, name)`
+- `uploadCompanyAccountAvatar(companyId, stellarAccountId, imageData)`
+- `getAvatarUrlBytes(avatarUrl)`
+- `deleteCompanyAccount(stellarAccountId)`
+- `getCompanyAccounts()`
+- `getCompanyAccount(stellarAccountId)`
 
-- `DEVELOP`: Development environment.
-- `STAGING`: Staging environment.
-
-### Methods:
-
-#### `updateEnvironment(environment)`
-
-Update the environment (development or staging).
-
-- `environment`: The environment specified using `BeansMerchantEnvironment`.
-
-#### `fetchCurrencies(stellarAccountId)`
-
-Fetches available Stellar currencies.
-
-Returns a Promise that resolves to an array of currencies.
-
-#### `generateQRCode(stellarAccountId, currencyId, amount, memo, webhookUrl = '')`
-
-Generates a QR code for a payment request.
-
-- `stellarAccountId`: Your Stellar account ID.
-- `currencyId`: Stellar currency ID.
-- `amount`: Amount for the payment request.
-- `memo`: Memo for the payment request.
-- `webhookUrl`: Optional webhook URL for payment received notification.
-
-Returns a Promise that resolves to the generated QR code.
-
-#### `generatePngQRCode(stellarAccountId, currencyId, amount, memo, webhookUrl = '')`
-
-Generates a PNG QR code for a payment request.
-
-- `stellarAccountId`: Your Stellar account ID.
-- `currencyId`: Stellar currency ID.
-- `amount`: Amount for the payment request.
-- `memo`: Memo for the payment request.
-- `webhookUrl`: Optional webhook URL for payment received notification.
-
-Returns a Promise that resolves to the base64-encoded PNG QR code string.
-
-#### `generateSvgQRCode(stellarAccountId, currencyId, amount, memo, webhookUrl = '')`
-
-Generates an SVG QR code for a payment request.
-
-- `stellarAccountId`: Your Stellar account ID.
-- `currencyId`: Stellar currency ID.
-- `amount`: Amount for the payment request.
-- `memo`: Memo for the payment request.
-- `webhookUrl`: Optional webhook URL for payment received notification.
-
+See [Methods](./Methods.md) for the parameters and the response fields.

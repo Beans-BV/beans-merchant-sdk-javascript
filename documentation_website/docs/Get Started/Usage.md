@@ -3,26 +3,27 @@ sidebar_position: 2
 ---
 ## Usage
 
-```bash
-// Import the BeansMerchantSDK class and BeansMerchantEnvironment
-import {BeansMerchantSDK, BeansMerchantEnvironment} from './index.js';
+```js
+// Import the BeansMerchantSdk class
+import { BeansMerchantSdk } from 'beans-merchant-sdk';
 
-// Create an instance of BeansMerchantSDK
-const merchant = new BeansMerchantSDK('your-api-key', BeansMerchantEnvironment.STAGING);
+// Create an instance for the staging environment
+const sdk = BeansMerchantSdk.staging('your-api-key');
 
-// Fetch currencies
-merchant.fetchCurrencies('stellarAccountId')
-  .then(currencies => {
-    console.log('Available currencies:', currencies);
+// Fetch the Stellar currencies of your account
+sdk.fetchStellarCurrencies('stellarAccountId')
+  .then(response => {
+    console.log('Available currencies:', response.stellarCurrencies);
   })
   .catch(error => {
     console.error('Error fetching currencies:', error);
   });
 
-// Generate QR code
-merchant.generateSvgQRCode('stellarAccountId','currency-id', 'amount', 'memo')
-  .then(qrCode => {
-    console.log('Generated QR code:', qrCode);
+// Generate an SVG QR code for a payment request of 10 units
+sdk.generateSvgQrCode('stellarAccountId', 'stellarCurrencyId', 10, 'memo')
+  .then(response => {
+    console.log('Payment request ID:', response.id);
+    console.log('SVG QR code:', response.svgQrCode);
   })
   .catch(error => {
     console.error('Error generating QR code:', error);
