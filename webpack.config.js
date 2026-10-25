@@ -25,6 +25,10 @@ export default {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    // Imports in src end in .js (needed for node16/nodenext consumers); resolve them to the .ts files
+    extensionAlias: {
+      '.js': ['.ts', '.js'],
+    },
   },
   output: {
     libraryTarget: 'module',

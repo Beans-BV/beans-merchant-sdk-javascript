@@ -1,4 +1,4 @@
-import { CompanyAccount } from './company_account';
+import { CompanyAccount } from './company_account.js';
 export interface GetCompanyAccountsResponseDto {
     accounts: CompanyAccount[];
 }

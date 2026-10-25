@@ -18,7 +18,7 @@
  * THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  */
 
-import { CompanyAccount } from './company_account';
+import { CompanyAccount } from './company_account.js';
 
 export interface GetCompanyAccountResponseDto {
     account: CompanyAccount;
