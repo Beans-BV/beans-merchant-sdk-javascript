@@ -11,5 +11,5 @@ export interface SvgQrCodeResponse extends DeeplinkResponse {
 }
 
 export interface PngQrCodeResponse extends DeeplinkResponse {
-  pngQrCodeBase64String: string;
+  pngQrCodeDataUri: string;
 }
