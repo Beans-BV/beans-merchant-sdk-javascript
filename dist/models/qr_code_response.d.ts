@@ -8,6 +8,6 @@ export interface SvgQrCodeResponse extends DeeplinkResponse {
     svgQrCode: string;
 }
 export interface PngQrCodeResponse extends DeeplinkResponse {
-    pngQrCodeBase64String: string;
+    pngQrCodeDataUri: string;
 }
 //# sourceMappingURL=qr_code_response.d.ts.map

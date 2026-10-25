@@ -7,6 +7,7 @@
 * **BREAKING CHANGES (types only, the runtime values do not change):**
 *  - `DeleteCompanyAccountResponse` is now an empty object, which is what the API returns
 *  - `CompanyAccount.name` is now `Record<string, string>`, which is what the API returns
+*  - `PngQrCodeResponse.pngQrCodeBase64String` is now `pngQrCodeDataUri` (a `data:image/png;base64,...` URI), which is what the API returns. The old field was always `undefined`
 
 ## 5.0.0
 *  - Added `avatarUrl` to `CompanyAccount` class

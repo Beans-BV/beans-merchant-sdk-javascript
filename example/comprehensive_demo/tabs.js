@@ -361,11 +361,11 @@ function renderPaymentsTab(state) {
                                 </div>
                             </div>
                         ` : ''}
-                        ${(response.pngQrCodeBase64String || response.pngQrCodeDataUri) ? `
+                        ${response.pngQrCodeDataUri ? `
                             <div class="mb-3">
                                 <strong>PNG QR Code Preview:</strong>
                                 <div class="qr-code-container bg-white p-3 rounded text-center">
-                                    <img src="${response.pngQrCodeDataUri || `data:image/png;base64,${response.pngQrCodeBase64String}`}" 
+                                    <img src="${response.pngQrCodeDataUri}"
                                          alt="QR Code" style="max-width: 250px;" />
                                 </div>
                             </div>
@@ -412,7 +412,7 @@ function escapeHtml(text) {
 
 function getPaymentResponseType(response) {
     if (response.svgQrCode) return 'SVG QR Code';
-    if (response.pngQrCodeBase64String || response.pngQrCodeDataUri) return 'PNG QR Code';
+    if (response.pngQrCodeDataUri) return 'PNG QR Code';
     if (response.deeplink) return 'Deeplink';
     return 'Payment Request';
 }

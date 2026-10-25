@@ -114,7 +114,7 @@ sdk.generateSvgQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, '
 merchant.generatePngQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: PngQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
-    console.log('Generated PNG QR code:', response.pngQrCodeBase64String);
+    console.log('Generated PNG QR code:', response.pngQrCodeDataUri);
   });
 ```
 
@@ -233,14 +233,14 @@ Returns:<br>
 Return Object Properties:<br>
   - `id`: *The ID of the payment request.*
   - `deeplink`: *The Beans App deeplink for the payment request.*
-  - `pngQrCodeBase64String`: *The base64 encoded PNG QR code containing the deeplink.*
+  - `pngQrCodeDataUri`: *The PNG QR code containing the deeplink, as a data URI (`data:image/png;base64,...`). Use it directly as an `<img>` `src`.*
 
 Example:<br>
 ```js
 sdk.generatePngQRCode('stellarAccountId', 'stellarCurrencyId', 100, 'memo', 1, 'https://your-domain.com/webhook', 250)
   .then((response: PngQrCodeResponse) => {
     console.log('Generated deeplink:', response.deeplink);
-    console.log('Generated PNG QR code:', response.pngQrCodeBase64String);
+    console.log('Generated PNG QR code:', response.pngQrCodeDataUri);
   });
 ```
 
